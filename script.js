@@ -1,58 +1,72 @@
-// ==========================
-// SAFE DOM INITIALIZATION
-// ==========================
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ==========================
-  // SIDEBAR ELEMENTS
-  // ==========================
   const sidebar = document.getElementById("sidebar");
   const openBtn = document.getElementById("openSidebar");
   const closeBtn = document.getElementById("closeSidebar");
 
-  // Safety check (voorkomt "null is not an object" crash)
-  if (!sidebar || !openBtn || !closeBtn) {
-    console.warn("Sidebar elements not found. Check HTML IDs.");
-    return;
+  if (!sidebar || !openBtn || !closeBtn) return;
+
+  let isOpen = false;
+
+  function openSidebar(){
+    sidebar.classList.add("active");
+    isOpen = true;
   }
 
-  // ==========================
-  // OPEN SIDEBAR
-  // ==========================
-  openBtn.addEventListener("click", () => {
-    sidebar.classList.add("active");
-  });
-
-  // ==========================
-  // CLOSE SIDEBAR
-  // ==========================
-  closeBtn.addEventListener("click", () => {
+  function closeSidebar(){
     sidebar.classList.remove("active");
+    isOpen = false;
+  }
+
+  // OPEN
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openSidebar();
   });
 
-  // ==========================
-  // SMOOTH SCROLL NAV LINKS
-  // ==========================
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      const targetId = link.getAttribute("href");
+  // CLOSE BUTTON
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeSidebar();
+  });
 
-      // skip empty/hash links
+  // CLICK OUTSIDE CLOSE (ROBUST)
+  document.addEventListener("click", (e) => {
+    if (!isOpen) return;
+
+    const clickedInsideSidebar = sidebar.contains(e.target);
+    const clickedButton = openBtn.contains(e.target);
+
+    if (!clickedInsideSidebar && !clickedButton) {
+      closeSidebar();
+    }
+  });
+
+  // STOP SIDEBAR CLICK PROPAGATION
+  sidebar.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  // SMOOTH SCROLL (SAFE)
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener("click", (e) => {
+
+      const targetId = link.getAttribute("href");
       if (!targetId || targetId === "#") return;
 
       const target = document.querySelector(targetId);
+      if (!target) return;
 
-      if (target) {
-        e.preventDefault();
+      e.preventDefault();
 
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
-        // sluit sidebar na klik (mobile UX)
-        sidebar.classList.remove("active");
-      }
+      closeSidebar();
     });
   });
 
