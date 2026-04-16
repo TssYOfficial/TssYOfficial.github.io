@@ -1,3 +1,13 @@
+const config = {
+  profile: "/images/5A07617F-F01C-4E58-B496-5D517B648E43.png",
+  username: "TssY.",
+  subtitle: "Discord • Minecraft • Development"
+};
+
+document.getElementById("profileImage").src = config.profile;
+document.getElementById("username").textContent = config.username;
+document.getElementById("subtitle").textContent = config.subtitle;
+
 document.querySelectorAll('.navbar a').forEach(link => {
   link.addEventListener('click', function(e){
     e.preventDefault();
@@ -5,20 +15,4 @@ document.querySelectorAll('.navbar a').forEach(link => {
       behavior: 'smooth'
     });
   });
-});
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.style.opacity = "1";
-      entry.target.style.transform = "translateY(0)";
-    }
-  });
-});
-
-document.querySelectorAll('.section').forEach(section => {
-  section.style.opacity = "0";
-  section.style.transform = "translateY(40px)";
-  section.style.transition = "all 0.8s ease";
-  observer.observe(section);
 });
