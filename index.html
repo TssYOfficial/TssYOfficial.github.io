@@ -13,8 +13,8 @@
 
 <!-- BACKGROUND -->
 <div class="bg"></div>
-<div class="brush b1"></div>
-<div class="brush b2"></div>
+<div class="mist m1"></div>
+<div class="mist m2"></div>
 
 <!-- SIDEBAR BUTTON -->
 <button id="openSidebar" class="menu-btn">☰</button>
@@ -31,7 +31,7 @@
 </div>
 
 <!-- HERO -->
-<header id="home" class="hero">
+<section id="home" class="hero fade">
   <img src="images/profile.png" class="pfp" alt="profile">
 
   <h1>TssY.</h1>
@@ -41,11 +41,11 @@
     <a href="#services" class="btn primary">Services</a>
     <a href="#contact" class="btn outline">Contact</a>
   </div>
-</header>
+</section>
 
 <!-- ABOUT -->
-<section id="about" class="section">
-  <h2>About Me</h2>
+<section id="about" class="section fade">
+  <h2>About</h2>
   <p>
     I build Discord bots, servers, Minecraft systems and modern websites.
     Focused on clean design, performance and reliable systems.
@@ -53,65 +53,44 @@
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="section">
+<section id="services" class="section fade">
   <h2>Services</h2>
 
   <div class="grid">
-    <div class="card">
-      <h3>Discord Bots</h3>
-      <p>Automation, moderation, tickets, economy systems.</p>
-    </div>
-
-    <div class="card">
-      <h3>Discord Servers</h3>
-      <p>Professional setups with clean structure and roles.</p>
-    </div>
-
-    <div class="card">
-      <h3>Minecraft Setup</h3>
-      <p>Paper/Spigot servers, plugins, optimization.</p>
-    </div>
-
-    <div class="card">
-      <h3>Web Dev</h3>
-      <p>Modern responsive websites.</p>
-    </div>
+    <div class="card">Discord Bots<br><span>Automation & systems</span></div>
+    <div class="card">Discord Servers<br><span>Clean professional setups</span></div>
+    <div class="card">Minecraft<br><span>Plugins & optimization</span></div>
+    <div class="card">Web Dev<br><span>Modern responsive sites</span></div>
   </div>
 </section>
 
-<!-- SKILLS (GEUPGRADE NAAR TABEL + BARS) -->
-<section id="skills" class="section">
-  <h2>Skills Overview</h2>
+<!-- SKILLS (BALKEN TERUG) -->
+<section id="skills" class="section fade">
+  <h2>Skills</h2>
 
-  <table class="skill-table">
-    <tr>
-      <td>Python</td>
-      <td><div class="bar"><div class="fill" style="width:95%"></div></div></td>
-      <td>95%</td>
-    </tr>
+  <div class="skill">
+    <span>Python</span>
+    <div class="bar"><div class="fill" data-width="95"></div></div>
+  </div>
 
-    <tr>
-      <td>Discord.py</td>
-      <td><div class="bar"><div class="fill" style="width:93%"></div></div></td>
-      <td>93%</td>
-    </tr>
+  <div class="skill">
+    <span>Discord.py</span>
+    <div class="bar"><div class="fill" data-width="93"></div></div>
+  </div>
 
-    <tr>
-      <td>HTML / CSS</td>
-      <td><div class="bar"><div class="fill" style="width:88%"></div></div></td>
-      <td>88%</td>
-    </tr>
+  <div class="skill">
+    <span>HTML / CSS</span>
+    <div class="bar"><div class="fill" data-width="88"></div></div>
+  </div>
 
-    <tr>
-      <td>Minecraft</td>
-      <td><div class="bar"><div class="fill" style="width:90%"></div></div></td>
-      <td>90%</td>
-    </tr>
-  </table>
+  <div class="skill">
+    <span>Minecraft</span>
+    <div class="bar"><div class="fill" data-width="90"></div></div>
+  </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section">
+<section id="contact" class="section fade">
   <h2>Contact</h2>
 
   <a class="btn primary" href="#">Discord</a>
