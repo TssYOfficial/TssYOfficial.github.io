@@ -3,110 +3,163 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TssY Portfolio</title>
+
+  <!-- Website titel aanpassen -->
+  <title>TssY | Portfolio</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="background-noise"></div>
-<div class="brush brush-one"></div>
-<div class="brush brush-two"></div>
+<!-- Achtergrond design -->
+<div class="background"></div>
+<div class="brush brush1"></div>
+<div class="brush brush2"></div>
 
-<header class="hero">
-  <div class="profile-wrapper">
-    <div class="ring"></div>
-    <img id="profileImage" class="profile-image" alt="Profile">
-  </div>
+<!-- Sidebar knop -->
+<button id="menuButton" class="menu-button">☰</button>
 
-  <h1 id="username"></h1>
-  <p id="subtitle"></p>
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar">
+  <button id="closeButton" class="close-button">×</button>
 
-  <div class="hero-buttons">
-    <a href="#services" class="button filled">Services</a>
-    <a href="#contact" class="button outline">Contact</a>
-  </div>
-</header>
+  <h2>Navigation</h2>
 
-<nav class="navbar">
+  <a href="#home">Home</a>
   <a href="#about">About</a>
   <a href="#services">Services</a>
   <a href="#skills">Skills</a>
   <a href="#projects">Projects</a>
   <a href="#contact">Contact</a>
-</nav>
+</aside>
 
-<section id="about" class="section">
-  <h2>About</h2>
+<!-- Homepage -->
+<section id="home" class="hero reveal">
+  <div class="profile-wrapper">
+    <!-- Profielfoto -->
+    <img src="images/profile.png" alt="Profile" class="profile-image">
+  </div>
+
+  <!-- Naam aanpassen -->
+  <h1>TssY.</h1>
+
+  <!-- Subtitel aanpassen -->
+  <p>Discord • Minecraft • Development</p>
+
+  <div class="hero-buttons">
+    <a href="#services" class="btn primary">View Services</a>
+    <a href="#contact" class="btn secondary">Contact</a>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section reveal">
+  <h2>About Me</h2>
   <p>
-    I create premium Discord systems, professional community structures,
-    Minecraft infrastructure and polished digital environments with a clean
-    aesthetic and reliable backend.
+    I create premium Discord servers, advanced bot systems,
+    professional Minecraft setups and modern websites.
+    My work focuses on clean design, stable systems and a professional experience.
   </p>
 </section>
 
-<section id="services" class="section">
+<!-- Services -->
+<section id="services" class="section reveal">
   <h2>Services</h2>
+
   <div class="grid">
     <div class="card">
       <h3>Discord Bot Development</h3>
-      <p>Custom automation, moderation, ticket systems and advanced integrations.</p>
+      <p>Custom Discord bots using Python and Discord.py with moderation, tickets and automation.</p>
     </div>
 
     <div class="card">
       <h3>Discord Server Development</h3>
-      <p>Modern server structures designed for premium communities.</p>
+      <p>Professional server layouts, permissions and premium structures.</p>
     </div>
 
     <div class="card">
       <h3>Server Management</h3>
-      <p>Long-term maintenance, moderation and growth optimization.</p>
+      <p>Long-term community management and optimization.</p>
+    </div>
+
+    <div class="card">
+      <h3>Minecraft Setup</h3>
+      <p>Complete Paper / Spigot setup and plugin configuration.</p>
     </div>
 
     <div class="card">
       <h3>Minecraft Development</h3>
-      <p>Complete server setup, plugin systems and management.</p>
+      <p>Advanced server systems and backend configuration.</p>
+    </div>
+
+    <div class="card">
+      <h3>Website Development</h3>
+      <p>Modern websites using HTML, CSS and JavaScript.</p>
     </div>
   </div>
 </section>
 
-<section id="skills" class="section">
+<!-- Skills -->
+<section id="skills" class="section reveal">
   <h2>Skills</h2>
 
   <div class="skill">
     <span>Python</span>
-    <div class="progress"><div class="progress-fill" style="width:95%"></div></div>
+    <div class="bar"><div class="fill" style="width:95%"></div></div>
   </div>
 
   <div class="skill">
     <span>Discord.py</span>
-    <div class="progress"><div class="progress-fill" style="width:92%"></div></div>
+    <div class="bar"><div class="fill" style="width:92%"></div></div>
   </div>
 
   <div class="skill">
     <span>HTML / CSS</span>
-    <div class="progress"><div class="progress-fill" style="width:88%"></div></div>
+    <div class="bar"><div class="fill" style="width:88%"></div></div>
+  </div>
+
+  <div class="skill">
+    <span>Minecraft Setup</span>
+    <div class="bar"><div class="fill" style="width:91%"></div></div>
+  </div>
+
+  <div class="skill">
+    <span>Minecraft Management</span>
+    <div class="bar"><div class="fill" style="width:89%"></div></div>
   </div>
 </section>
 
-<section id="projects" class="section">
+<!-- Projects -->
+<section id="projects" class="section reveal">
   <h2>Projects</h2>
+
   <div class="grid">
     <div class="card">
-      <h3>Support Bot</h3>
-      <p>Custom ticketing and moderation system for active communities.</p>
+      <h3>Advanced Ticket Bot</h3>
+      <p>Multi-category support system with transcripts and logging.</p>
     </div>
 
     <div class="card">
-      <h3>Premium Setup</h3>
-      <p>High-end Discord server design and structure implementation.</p>
+      <h3>Community Server Build</h3>
+      <p>Premium Discord infrastructure with automation.</p>
+    </div>
+
+    <div class="card">
+      <h3>Minecraft Network</h3>
+      <p>Optimized multi-server setup with permissions.</p>
     </div>
   </div>
 </section>
 
-<section id="contact" class="section">
+<!-- Contact -->
+<section id="contact" class="section reveal">
   <h2>Contact</h2>
-  <p>Interested in building something professional together?</p>
-  <a href="#" class="button filled">Get In Touch</a>
+  <p>Interested in working together?</p>
+
+  <div class="hero-buttons">
+    <a href="#" class="btn primary">Discord</a>
+    <a href="#" class="btn secondary">Email</a>
+  </div>
 </section>
 
 <script src="script.js"></script>
