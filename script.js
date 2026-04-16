@@ -1,80 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
+const sidebar = document.getElementById("sidebar");
+const openBtn = document.getElementById("openSidebar");
+const closeBtn = document.getElementById("closeSidebar");
 
-  const sidebar = document.getElementById("sidebar");
-  const openBtn = document.getElementById("openSidebar");
-  const closeBtn = document.getElementById("closeSidebar");
+openBtn.onclick = () => sidebar.classList.add("active");
+closeBtn.onclick = () => sidebar.classList.remove("active");
 
-  if (!sidebar || !openBtn || !closeBtn) return;
-
-  let isOpen = false;
-
-  function updateUI() {
-    sidebar.classList.toggle("active", isOpen);
-
-    // ☰ button verbergen als sidebar open is
-    openBtn.style.opacity = isOpen ? "0" : "1";
-    openBtn.style.pointerEvents = isOpen ? "none" : "auto";
+document.addEventListener("click", (e) => {
+  if (sidebar.classList.contains("active") &&
+      !sidebar.contains(e.target) &&
+      e.target !== openBtn) {
+    sidebar.classList.remove("active");
   }
+});
 
-  function openSidebar() {
-    isOpen = true;
-    updateUI();
-  }
-
-  function closeSidebar() {
-    isOpen = false;
-    updateUI();
-  }
-
-  function toggleSidebar() {
-    isOpen = !isOpen;
-    updateUI();
-  }
-
-  // OPEN (TOGGLE)
-  openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleSidebar();
+/* SKILL ANIMATION */
+window.addEventListener("load", () => {
+  document.querySelectorAll(".fill").forEach(bar => {
+    bar.style.width = bar.dataset.width + "%";
   });
-
-  // CLOSE BUTTON
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    closeSidebar();
-  });
-
-  // CLICK OUTSIDE CLOSE
-  document.addEventListener("click", (e) => {
-    if (!isOpen) return;
-
-    if (!sidebar.contains(e.target) && e.target !== openBtn) {
-      closeSidebar();
-    }
-  });
-
-  // STOP BUBBLE INSIDE SIDEBAR
-  sidebar.addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
-
-  // SMOOTH SCROLL
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener("click", (e) => {
-
-      const target = document.querySelector(link.getAttribute("href"));
-      if (!target) return;
-
-      e.preventDefault();
-
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-      closeSidebar();
-    });
-  });
-
 });
