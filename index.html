@@ -21,7 +21,6 @@
 
 <!-- SIDEBAR -->
 <div id="sidebar" class="sidebar">
-
   <button id="closeSidebar" class="close-btn">×</button>
 
   <a href="#home">Home</a>
@@ -29,11 +28,10 @@
   <a href="#services">Services</a>
   <a href="#skills">Skills</a>
   <a href="#contact">Contact</a>
-
 </div>
 
-<!-- HOME -->
-<section id="home" class="hero">
+<!-- HERO -->
+<header id="home" class="hero">
   <img src="images/profile.png" class="pfp" alt="profile">
 
   <h1>TssY.</h1>
@@ -43,11 +41,11 @@
     <a href="#services" class="btn primary">Services</a>
     <a href="#contact" class="btn outline">Contact</a>
   </div>
-</section>
+</header>
 
 <!-- ABOUT -->
 <section id="about" class="section">
-  <h2>About</h2>
+  <h2>About Me</h2>
   <p>
     I build Discord bots, servers, Minecraft systems and modern websites.
     Focused on clean design, performance and reliable systems.
@@ -81,31 +79,35 @@
   </div>
 </section>
 
-<!-- SKILLS -->
+<!-- SKILLS (GEUPGRADE NAAR TABEL + BARS) -->
 <section id="skills" class="section">
+  <h2>Skills Overview</h2>
 
-  <h2>Skills</h2>
+  <table class="skill-table">
+    <tr>
+      <td>Python</td>
+      <td><div class="bar"><div class="fill" style="width:95%"></div></div></td>
+      <td>95%</td>
+    </tr>
 
-  <div class="skill">
-    <span>Python</span>
-    <div class="bar"><div class="fill" style="width:95%"></div></div>
-  </div>
+    <tr>
+      <td>Discord.py</td>
+      <td><div class="bar"><div class="fill" style="width:93%"></div></div></td>
+      <td>93%</td>
+    </tr>
 
-  <div class="skill">
-    <span>Discord.py</span>
-    <div class="bar"><div class="fill" style="width:93%"></div></div>
-  </div>
+    <tr>
+      <td>HTML / CSS</td>
+      <td><div class="bar"><div class="fill" style="width:88%"></div></div></td>
+      <td>88%</td>
+    </tr>
 
-  <div class="skill">
-    <span>HTML / CSS</span>
-    <div class="bar"><div class="fill" style="width:88%"></div></div>
-  </div>
-
-  <div class="skill">
-    <span>Minecraft</span>
-    <div class="bar"><div class="fill" style="width:90%"></div></div>
-  </div>
-
+    <tr>
+      <td>Minecraft</td>
+      <td><div class="bar"><div class="fill" style="width:90%"></div></div></td>
+      <td>90%</td>
+    </tr>
+  </table>
 </section>
 
 <!-- CONTACT -->
