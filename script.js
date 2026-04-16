@@ -1,26 +1,59 @@
-// SIDEBAR
-const sidebar = document.getElementById("sidebar");
-const openBtn = document.getElementById("openSidebar");
-const closeBtn = document.getElementById("closeSidebar");
+// ==========================
+// SAFE DOM INITIALIZATION
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
 
-openBtn.addEventListener("click", () => {
-  sidebar.classList.add("active");
-});
+  // ==========================
+  // SIDEBAR ELEMENTS
+  // ==========================
+  const sidebar = document.getElementById("sidebar");
+  const openBtn = document.getElementById("openSidebar");
+  const closeBtn = document.getElementById("closeSidebar");
 
-closeBtn.addEventListener("click", () => {
-  sidebar.classList.remove("active");
-});
+  // Safety check (voorkomt "null is not an object" crash)
+  if (!sidebar || !openBtn || !closeBtn) {
+    console.warn("Sidebar elements not found. Check HTML IDs.");
+    return;
+  }
 
-// SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener("click", e => {
-    e.preventDefault();
+  // ==========================
+  // OPEN SIDEBAR
+  // ==========================
+  openBtn.addEventListener("click", () => {
+    sidebar.classList.add("active");
+  });
 
-    const target = document.querySelector(a.getAttribute("href"));
-    if(target){
-      target.scrollIntoView({behavior:"smooth"});
-    }
-
+  // ==========================
+  // CLOSE SIDEBAR
+  // ==========================
+  closeBtn.addEventListener("click", () => {
     sidebar.classList.remove("active");
   });
+
+  // ==========================
+  // SMOOTH SCROLL NAV LINKS
+  // ==========================
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      const targetId = link.getAttribute("href");
+
+      // skip empty/hash links
+      if (!targetId || targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+
+      if (target) {
+        e.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        // sluit sidebar na klik (mobile UX)
+        sidebar.classList.remove("active");
+      }
+    });
+  });
+
 });
