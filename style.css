@@ -8,7 +8,7 @@ body {
   font-family: Arial, sans-serif;
   background: #050505;
   color: white;
-  line-height: 1.5;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
@@ -17,17 +17,17 @@ body {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at top left, rgba(255,255,255,0.04), transparent 40%),
-    radial-gradient(circle at bottom right, rgba(255,255,255,0.02), transparent 40%);
+    radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.03), transparent 45%);
   z-index: -3;
 }
 
 .brush {
   position: fixed;
-  width: 650px;
+  width: 600px;
   height: 140px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-  filter: blur(10px);
+  filter: blur(12px);
   z-index: -2;
 }
 
@@ -42,9 +42,9 @@ body {
   width: 240px;
   height: 100%;
   background: #0b0b0b;
-  padding: 22px;
+  padding: 20px;
   transition: 0.3s ease;
-  z-index: 2000;
+  z-index: 9999;
 }
 
 .sidebar.active {
@@ -56,16 +56,15 @@ body {
   color: white;
   text-decoration: none;
   margin: 14px 0;
-  font-size: 14px;
 }
 
-/* CLOSE BUTTON */
+/* CLOSE */
 .close-btn {
   background: none;
   border: none;
   color: white;
   font-size: 24px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -74,7 +73,7 @@ body {
   position: fixed;
   top: 14px;
   left: 14px;
-  z-index: 3000;
+  z-index: 10000;
   background: #111;
   color: white;
   border: none;
@@ -92,7 +91,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 24px;
+  padding: 20px;
 }
 
 .pfp {
@@ -101,33 +100,22 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
-/* TEXT */
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.3rem;
 }
 
 h2 {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-}
-
-p {
-  font-size: 0.95rem;
-}
-
-/* SUB */
-.sub {
-  color: #aaa;
-  margin: 10px 0 18px;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
 }
 
 /* SECTIONS */
 .section {
-  max-width: 900px;
-  margin: 24px auto;
+  max-width: 950px;
+  margin: 30px auto;
   padding: 22px;
   background: rgba(255,255,255,0.02);
   border-radius: 14px;
@@ -146,17 +134,23 @@ p {
   border-radius: 12px;
 }
 
-/* SKILLS */
-.skill {
-  margin-bottom: 12px;
+/* SKILLS TABLE */
+.skill-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skill-table td {
+  padding: 10px 6px;
+  font-size: 0.95rem;
 }
 
 .bar {
+  width: 100%;
   height: 8px;
   background: #111;
   border-radius: 20px;
   overflow: hidden;
-  margin-top: 5px;
 }
 
 .fill {
@@ -171,8 +165,6 @@ p {
   border-radius: 18px;
   text-decoration: none;
   margin: 6px;
-  font-size: 0.9rem;
-  transition: 0.2s;
 }
 
 .primary {
@@ -183,8 +175,4 @@ p {
 .outline {
   border: 1px solid white;
   color: white;
-}
-
-.btn:hover {
-  transform: translateY(-2px);
 }
