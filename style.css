@@ -1,29 +1,15 @@
 * {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px !important;
-  zoom: 1 !important;
-}
-
 body {
-  width: 100%;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
   background: #050505;
   color: white;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
   overflow-x: hidden;
-}
-
-/* FORCE NO GLOBAL HEADING SCALING ISSUES */
-h1, h2, h3, p, span, a {
-  font-size: inherit;
-  font-weight: normal;
 }
 
 /* BACKGROUND */
@@ -38,8 +24,8 @@ h1, h2, h3, p, span, a {
 
 .brush {
   position: fixed;
-  width: 600px;
-  height: 120px;
+  width: 650px;
+  height: 140px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
   filter: blur(10px);
   z-index: -2;
@@ -48,32 +34,17 @@ h1, h2, h3, p, span, a {
 .b1 { top: 120px; left: -250px; transform: rotate(-10deg); }
 .b2 { top: 350px; right: -250px; transform: rotate(10deg); }
 
-/* MENU BUTTON */
-.menu-btn {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 9999;
-  background: #111;
-  color: white;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
 /* SIDEBAR */
 .sidebar {
   position: fixed;
   top: 0;
   left: -260px;
-  width: 220px;
+  width: 240px;
   height: 100%;
   background: #0b0b0b;
-  padding: 20px !important;
+  padding: 22px;
   transition: 0.3s ease;
-  z-index: 9998;
+  z-index: 2000;
 }
 
 .sidebar.active {
@@ -84,7 +55,7 @@ h1, h2, h3, p, span, a {
   display: block;
   color: white;
   text-decoration: none;
-  margin: 12px 0 !important;
+  margin: 14px 0;
   font-size: 14px;
 }
 
@@ -93,9 +64,24 @@ h1, h2, h3, p, span, a {
   background: none;
   border: none;
   color: white;
-  font-size: 20px;
-  margin-bottom: 15px !important;
+  font-size: 24px;
+  margin-bottom: 18px;
   cursor: pointer;
+}
+
+/* MENU BUTTON */
+.menu-btn {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 3000;
+  background: #111;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
 }
 
 /* HERO */
@@ -106,63 +92,87 @@ h1, h2, h3, p, span, a {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px !important;
+  padding: 24px;
 }
 
 .pfp {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid white;
-  margin-bottom: 12px !important;
+  margin-bottom: 14px;
 }
 
 /* TEXT */
 h1 {
-  font-size: 32px;
+  font-size: 2.2rem;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
 }
 
+p {
+  font-size: 0.95rem;
+}
+
+/* SUB */
 .sub {
   color: #aaa;
-  margin: 10px 0 16px !important;
-  font-size: 14px;
+  margin: 10px 0 18px;
 }
 
 /* SECTIONS */
 .section {
-  max-width: 850px;
-  margin: 20px auto !important;
-  padding: 18px !important;
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 22px;
   background: rgba(255,255,255,0.02);
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 /* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
+  gap: 14px;
 }
 
 .card {
   background: rgba(255,255,255,0.03);
-  padding: 12px !important;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+/* SKILLS */
+.skill {
+  margin-bottom: 12px;
+}
+
+.bar {
+  height: 8px;
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 5px;
+}
+
+.fill {
+  height: 100%;
+  background: white;
 }
 
 /* BUTTONS */
 .btn {
   display: inline-block;
-  padding: 10px 16px !important;
-  border-radius: 16px;
+  padding: 10px 18px;
+  border-radius: 18px;
   text-decoration: none;
-  margin: 5px !important;
-  font-size: 14px;
+  margin: 6px;
+  font-size: 0.9rem;
+  transition: 0.2s;
 }
 
 .primary {
@@ -173,4 +183,8 @@ h2 {
 .outline {
   border: 1px solid white;
   color: white;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
 }
