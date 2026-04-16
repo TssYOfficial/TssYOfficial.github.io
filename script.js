@@ -1,18 +1,40 @@
-const config = {
-  profile: "/images/5A07617F-F01C-4E58-B496-5D517B648E43.png",
-  username: "TssY.",
-  subtitle: "Discord • Minecraft • Development"
+// Sidebar openen/sluiten
+const menuButton = document.getElementById("menuButton");
+const closeButton = document.getElementById("closeButton");
+const sidebar = document.getElementById("sidebar");
+
+menuButton.onclick = () => {
+  sidebar.classList.add("active");
 };
 
-document.getElementById("profileImage").src = config.profile;
-document.getElementById("username").textContent = config.username;
-document.getElementById("subtitle").textContent = config.subtitle;
+closeButton.onclick = () => {
+  sidebar.classList.remove("active");
+};
 
-document.querySelectorAll('.navbar a').forEach(link => {
-  link.addEventListener('click', function(e){
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", function(e){
     e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
+
+    document.querySelector(this.getAttribute("href")).scrollIntoView({
+      behavior:"smooth"
     });
+
+    sidebar.classList.remove("active");
   });
+});
+
+// Scroll reveal animatie
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+      entry.target.style.transition = "all 0.8s ease";
+    }
+  });
+});
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
 });
