@@ -1,12 +1,136 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Mijn Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TssY | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welkom op mijn portfolio</h1>
-    <p>Ik ben Thijs en dit is mijn website.</p>
+
+<div class="background-glow"></div>
+
+<header class="hero">
+  <div class="profile-card">
+    <img src="images/profile.png" alt="Profile" class="profile-img">
+    <h1>TssY.</h1>
+    <p class="subtitle">Discord & Minecraft Developer</p>
+    <div class="hero-buttons">
+      <a href="#services" class="btn primary">My Services</a>
+      <a href="#contact" class="btn secondary">Contact</a>
+    </div>
+  </div>
+</header>
+
+<nav class="navbar">
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="about" class="section glass">
+  <h2>About Me</h2>
+  <p>
+    I specialize in building premium Discord communities, advanced automation systems,
+    Minecraft server ecosystems and polished web experiences.
+    My focus is creating systems that are both visually professional and technically reliable.
+  </p>
+  <p>
+    From complete server development to long-term management,
+    I help communities grow with custom solutions tailored to each client.
+  </p>
+</section>
+
+<section id="services" class="section glass">
+  <h2>Services</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Discord Bot Development</h3>
+      <p>Custom Discord bots built with Python and Discord.py including tickets, moderation, economy, logging and advanced systems.</p>
+    </div>
+
+    <div class="card">
+      <h3>Discord Server Development</h3>
+      <p>Professional server structures, permission systems, onboarding setups and premium channel layouts.</p>
+    </div>
+
+    <div class="card">
+      <h3>Discord Server Management</h3>
+      <p>Community moderation, support systems and growth management to maintain active professional communities.</p>
+    </div>
+
+    <div class="card">
+      <h3>Minecraft Server Setup</h3>
+      <p>Complete setup of Paper, Spigot or custom Minecraft servers with optimized performance and plugin integration.</p>
+    </div>
+
+    <div class="card">
+      <h3>Minecraft Development</h3>
+      <p>Custom configurations, gameplay systems and technical backend improvements for premium servers.</p>
+    </div>
+
+    <div class="card">
+      <h3>Web Development</h3>
+      <p>Responsive modern websites using HTML, CSS and JavaScript designed for clean professional presentation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section glass">
+  <h2>Technical Skills</h2>
+
+  <div class="skill-box">
+    <span>Python</span>
+    <div class="bar"><div class="fill" style="width:95%"></div></div>
+  </div>
+
+  <div class="skill-box">
+    <span>Discord.py</span>
+    <div class="bar"><div class="fill" style="width:92%"></div></div>
+  </div>
+
+  <div class="skill-box">
+    <span>HTML / CSS</span>
+    <div class="bar"><div class="fill" style="width:88%"></div></div>
+  </div>
+
+  <div class="skill-box">
+    <span>Minecraft Servers</span>
+    <div class="bar"><div class="fill" style="width:90%"></div></div>
+  </div>
+</section>
+
+<section id="projects" class="section glass">
+  <h2>Featured Projects</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Advanced Ticket Bot</h3>
+      <p>Multi-category support bot with transcripts, claim systems and staff analytics.</p>
+    </div>
+
+    <div class="card">
+      <h3>Community Server Build</h3>
+      <p>Full Discord infrastructure with automated onboarding and premium role systems.</p>
+    </div>
+
+    <div class="card">
+      <h3>Minecraft Network Setup</h3>
+      <p>Configured optimized server network with permissions, economy and custom gameplay systems.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section glass">
+  <h2>Contact</h2>
+  <p>Interested in working together on your next project?</p>
+  <div class="contact-buttons">
+    <a href="#" class="btn primary">Discord</a>
+    <a href="#" class="btn secondary">Email</a>
+  </div>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
