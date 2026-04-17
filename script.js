@@ -5,75 +5,96 @@ const sidebarLinks = document.querySelectorAll(".sidebar a");
 
 // --- RENDER CONTENT FROM DATA.JS ---
 const renderContent = () => {
-  // Check localStorage first for persistence across refreshes
-  const savedData = localStorage.getItem('portfolioData');
-  if (savedData) {
-    window.portfolioData = JSON.parse(savedData);
-  }
-  
   const data = window.portfolioData;
-  if (!data) return;
+  if (!data) {
+    console.error("[SAMURAI] No portfolio data found!");
+    return;
+  }
 
   // Hero
-  document.getElementById('hero-name').innerText = data.hero.name;
-  document.getElementById('hero-sub').innerText = data.hero.sub;
+  const heroName = document.getElementById('hero-name');
+  const heroSub = document.getElementById('hero-sub');
+  if (heroName) heroName.innerText = data.hero.name;
+  if (heroSub) heroSub.innerText = data.hero.sub;
 
   // About
-  document.getElementById('about-text').innerText = data.about.text;
+  const aboutText = document.getElementById('about-text');
+  if (aboutText) aboutText.innerText = data.about.text;
+  
   const highlightsContainer = document.getElementById('about-highlights');
-  highlightsContainer.innerHTML = data.about.highlights.map(h => `<div class="info">${h}</div>`).join('');
+  if (highlightsContainer) {
+    highlightsContainer.innerHTML = data.about.highlights.map(h => `<div class="info">${h}</div>`).join('');
+  }
 
   // Experience
   const experienceContainer = document.getElementById('experience-list');
-  experienceContainer.innerHTML = data.experience.map(exp => `
-    <div class="timeline-item">
-      <div class="timeline-date">${exp.date}</div>
-      <h3>${exp.title}</h3>
-      <p>${exp.desc}</p>
-    </div>
-  `).join('');
+  if (experienceContainer) {
+    experienceContainer.innerHTML = data.experience.map(exp => `
+      <div class="timeline-item">
+        <div class="timeline-date">${exp.date}</div>
+        <h3>${exp.title}</h3>
+        <p>${exp.desc}</p>
+      </div>
+    `).join('');
+  }
 
   // Services
   const servicesContainer = document.getElementById('services-list');
-  servicesContainer.innerHTML = data.services.map(s => `
-    <div class="card">
-      <h3>${s.title}</h3>
-      <p>${s.desc}</p>
-    </div>
-  `).join('');
+  if (servicesContainer) {
+    servicesContainer.innerHTML = data.services.map(s => `
+      <div class="card">
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+      </div>
+    `).join('');
+  }
 
   // Projects
   const projectsContainer = document.getElementById('projects-list');
-  projectsContainer.innerHTML = data.projects.map(p => `
-    <div class="card">
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-    </div>
-  `).join('');
+  if (projectsContainer) {
+    projectsContainer.innerHTML = data.projects.map(p => `
+      <div class="card">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+      </div>
+    `).join('');
+  }
 
   // Skills
   const skillsContainer = document.getElementById('skills-list');
-  skillsContainer.innerHTML = data.skills.map(s => `
-    <div class="skill">
-      <span>${s.name}</span>
-      <div class="bar"><div class="fill" data-width="${s.level}"></div></div>
-    </div>
-  `).join('');
+  if (skillsContainer) {
+    skillsContainer.innerHTML = data.skills.map(s => `
+      <div class="skill">
+        <span>${s.name}</span>
+        <div class="bar"><div class="fill" data-width="${s.level}"></div></div>
+      </div>
+    `).join('');
+  }
 
   // Stats
   const statsContainer = document.getElementById('stats-list');
-  statsContainer.innerHTML = data.stats.map(s => `
-    <div>
-      <h3>${s.number}</h3>
-      <p>${s.label}</p>
-    </div>
-  `).join('');
+  if (statsContainer) {
+    statsContainer.innerHTML = data.stats.map(s => `
+      <div>
+        <h3>${s.number}</h3>
+        <p>${s.label}</p>
+      </div>
+    `).join('');
+  }
 
   // Re-observe revealed elements since they were just added
   document.querySelectorAll(".reveal").forEach(el => {
     revealObserver.observe(el);
   });
 };
+
+// --- DATA INITIALIZATION ---
+const initData = () => {
+  renderContent();
+};
+
+// Initialize on load
+window.addEventListener('DOMContentLoaded', initData);
 
 // --- ANIMATED BACKGROUND (CANVAS) ---
 const canvas = document.getElementById('bg-canvas');
@@ -405,28 +426,14 @@ if (generateUpdateBtn) {
     const scriptContent = `const portfolioData = ${JSON.stringify(data, null, 2)};\n\nwindow.portfolioData = portfolioData;`;
     navigator.clipboard.writeText(scriptContent);
     
-    // Save to localStorage for browser persistence
-    localStorage.setItem('portfolioData', JSON.stringify(data));
-    
     const originalText = generateUpdateBtn.innerText;
-    generateUpdateBtn.innerText = 'SAVED & COPIED!';
+    generateUpdateBtn.innerText = 'COPIED TO CLIPS!';
     setTimeout(() => {
       generateUpdateBtn.innerText = originalText;
-      alert('SUCCESS: Changes saved to browser and copied to clipboard. To make them permanent for EVERYONE, you must still paste the copied code into data.js on GitHub.');
+      alert('SUCCESS: New data copied to clipboard. Paste it into data.js on GitHub to make the changes permanent.');
       window.portfolioData = data;
       renderContent();
     }, 1500);
-  };
-}
-
-// Reset Data Logic
-const resetDataBtn = document.getElementById('resetDataBtn');
-if (resetDataBtn) {
-  resetDataBtn.onclick = () => {
-    if (confirm('RESET ALL CHANGES? This will restore the original data from data.js.')) {
-      localStorage.removeItem('portfolioData');
-      location.reload();
-    }
   };
 }
 
