@@ -49,8 +49,8 @@ const portfolioData = {
   ],
   "projects": [
     {
-      "title": "Discord Guardian",
-      "desc": "Advanced moderation bot with machine learning for spam detection."
+      "title": "Zyro",
+      "desc": "A way to order custom Discord bots.
     },
     {
       "title": "Nexus Portal",
