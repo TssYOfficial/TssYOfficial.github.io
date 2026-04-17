@@ -53,10 +53,6 @@ const portfolioData = {
       "desc": "Advanced moderation bot with machine learning for spam detection."
     },
     {
-      "title": "SkyBlock Engine",
-      "desc": "Custom Minecraft plugin suite for highly scalable game modes."
-    },
-    {
       "title": "Nexus Portal",
       "desc": "A central dashboard for managing multiple game servers and bots."
     },
@@ -71,12 +67,12 @@ const portfolioData = {
       "level": 95
     },
     {
-      "name": "JavaScript / TypeScript",
-      "level": 90
+      "name": "Web Development",
+      "level": 82
     },
     {
-      "name": "HTML / CSS / React",
-      "level": 88
+      "name": "HTML / CSS",
+      "level": 84
     },
     {
       "name": "Minecraft Development",
@@ -85,11 +81,11 @@ const portfolioData = {
   ],
   "stats": [
     {
-      "number": "50+",
+      "number": "20+",
       "label": "Projects"
     },
     {
-      "number": "20+",
+      "number": "15+",
       "label": "Bots"
     },
     {
