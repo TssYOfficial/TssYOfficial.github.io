@@ -630,6 +630,141 @@ h2::before {
   opacity: 0.5;
 }
 
+/* OVERLAYS */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+  padding: 20px;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-content {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 60px;
+  transform: translateY(30px);
+  transition: var(--transition);
+}
+
+.overlay.active .overlay-content {
+  transform: translateY(0);
+}
+
+.close-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.close-overlay:hover {
+  transform: rotate(90deg);
+  color: var(--accent-color);
+}
+
+/* DISCORD CARD STYLES */
+.discord-card {
+  text-align: center;
+}
+
+.discord-tag {
+  font-family: var(--font-japanese);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  color: var(--accent-color);
+  margin: 30px 0;
+  letter-spacing: 2px;
+  word-break: break-all;
+}
+
+.extra-info {
+  font-family: var(--font-body);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #43b581;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0 10px #43b581;
+}
+
+/* CONTACT FORM STYLES */
+.contact-form-container {
+  max-width: 800px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: var(--text-secondary);
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--accent-color);
+  background: rgba(255,255,255,0.05);
+}
+
+.form-group textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   h1 { font-size: 4rem; }
