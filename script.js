@@ -67,22 +67,26 @@ animate();
 
 // --- SIDEBAR TOGGLE ---
 const toggleSidebar = (state) => {
-  sidebar.classList.toggle("active", state);
-  document.body.style.overflow = state ? "hidden" : "";
+  if (sidebar) {
+    sidebar.classList.toggle("active", state);
+    document.body.style.overflow = state ? "hidden" : "";
+  }
 };
 
-openBtn.onclick = () => toggleSidebar(true);
-closeBtn.onclick = () => toggleSidebar(false);
+if (openBtn) openBtn.onclick = () => toggleSidebar(true);
+if (closeBtn) closeBtn.onclick = () => toggleSidebar(false);
 
-sidebarLinks.forEach(link => {
-  link.onclick = () => toggleSidebar(false);
-});
+if (sidebarLinks) {
+  sidebarLinks.forEach(link => {
+    link.onclick = () => toggleSidebar(false);
+  });
+}
 
 // CLOSE SIDEBAR ON OUTSIDE CLICK
 document.addEventListener("click", (e) => {
-  if (sidebar.classList.contains("active") &&
+  if (sidebar && sidebar.classList.contains("active") &&
       !sidebar.contains(e.target) &&
-      !openBtn.contains(e.target)) {
+      (!openBtn || !openBtn.contains(e.target))) {
     toggleSidebar(false);
   }
 });
@@ -116,20 +120,22 @@ document.querySelectorAll(".reveal").forEach(el => {
 
 const backToTopBtn = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 500) {
-    backToTopBtn.classList.add("visible");
-  } else {
-    backToTopBtn.classList.remove("visible");
-  }
-});
-
-backToTopBtn.onclick = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+if (backToTopBtn) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 500) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
   });
-};
+
+  backToTopBtn.onclick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+}
 
 // SMOOTH SCROLL FOR ALL ANCHOR LINKS
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
