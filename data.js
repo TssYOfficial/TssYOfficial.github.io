@@ -50,7 +50,7 @@ const portfolioData = {
   "projects": [
     {
       "title": "Zyro",
-      "desc": "A way to order custom Discord bots.
+      "desc": "A way to order custom Discord bots."
     },
     {
       "title": "Nexus Portal",
