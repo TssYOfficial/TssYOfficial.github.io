@@ -467,7 +467,7 @@ h2::before {
 
 .primary {
   background: var(--accent-color);
-  color: var(--bg-color);
+  color: #000000; /* Black text on white button */
 }
 
 .primary::after {
@@ -485,7 +485,7 @@ h2::before {
 }
 
 .primary:hover {
-  color: var(--accent-color);
+  color: #ffffff; /* White text when background turns black on hover */
 }
 
 .primary:hover::after {
@@ -500,7 +500,7 @@ h2::before {
 
 .outline:hover {
   background: var(--accent-color);
-  color: var(--bg-color);
+  color: #000000;
 }
 
 /* TIMELINE (SAMURAI SLICE STYLE) */
