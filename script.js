@@ -179,6 +179,43 @@ document.addEventListener('mousemove', (e) => {
   if (heroPfp) heroPfp.style.transform = `translate(${-x/2}px, ${-y/2}px)`;
 });
 
+// --- CONTACT SECTION REVEAL LOGIC ---
+const contactSection = document.getElementById('contact');
+const revealContactBtns = document.querySelectorAll('a[href="#contact"], .hero .btn.outline');
+
+const revealContact = () => {
+  if (contactSection) {
+    contactSection.classList.add('revealed');
+    setTimeout(() => {
+      window.scrollTo({
+        top: contactSection.offsetTop - 50,
+        behavior: 'smooth'
+      });
+    }, 100);
+  }
+};
+
+revealContactBtns.forEach(btn => {
+  btn.onclick = (e) => {
+    e.preventDefault();
+    revealContact();
+  };
+});
+
+// Auto-hide contact section when it leaves the screen
+const contactObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+      // If we've scrolled above the contact section, hide it again
+      contactSection.classList.remove('revealed');
+    }
+  });
+}, { threshold: 0.1 });
+
+if (contactSection) {
+  contactObserver.observe(contactSection);
+}
+
 // --- OVERLAY SYSTEM ---
 const discordOverlay = document.getElementById('discordOverlay');
 const contactOverlay = document.getElementById('contactOverlay');
