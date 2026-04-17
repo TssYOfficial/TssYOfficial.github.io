@@ -49,8 +49,12 @@ const portfolioData = {
   ],
   "projects": [
     {
-      "title": "Zyro",
-      "desc": "A way to order custom Discord bots."
+      "title": "Discord Guardian",
+      "desc": "Advanced moderation bot with machine learning for spam detection."
+    },
+    {
+      "title": "SkyBlock Engine",
+      "desc": "Custom Minecraft plugin suite for highly scalable game modes."
     },
     {
       "title": "Nexus Portal",
@@ -67,12 +71,12 @@ const portfolioData = {
       "level": 95
     },
     {
-      "name": "Web Development",
-      "level": 82
+      "name": "JavaScript / TypeScript",
+      "level": 90
     },
     {
       "name": "HTML / CSS",
-      "level": 84
+      "level": 88
     },
     {
       "name": "Minecraft Development",
@@ -81,11 +85,11 @@ const portfolioData = {
   ],
   "stats": [
     {
-      "number": "20+",
+      "number": "50+",
       "label": "Projects"
     },
     {
-      "number": "15+",
+      "number": "20+",
       "label": "Bots"
     },
     {
