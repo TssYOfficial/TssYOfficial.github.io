@@ -181,7 +181,7 @@ document.addEventListener('mousemove', (e) => {
 
 // --- CONTACT SCROLL LOGIC ---
 const contactSection = document.getElementById('contact');
-const scrollToContactBtns = document.querySelectorAll('a[href="#contact"], .hero .btn.outline');
+const scrollToContactBtns = document.querySelectorAll('a[href="#contact"]');
 
 scrollToContactBtns.forEach(btn => {
   btn.onclick = (e) => {
