@@ -3,6 +3,72 @@ const openBtn = document.getElementById("openSidebar");
 const closeBtn = document.getElementById("closeSidebar");
 const sidebarLinks = document.querySelectorAll(".sidebar a");
 
+// --- RENDER CONTENT FROM DATA.JS ---
+const renderContent = () => {
+  const data = window.portfolioData;
+  if (!data) return;
+
+  // Hero
+  document.getElementById('hero-name').innerText = data.hero.name;
+  document.getElementById('hero-sub').innerText = data.hero.sub;
+
+  // About
+  document.getElementById('about-text').innerText = data.about.text;
+  const highlightsContainer = document.getElementById('about-highlights');
+  highlightsContainer.innerHTML = data.about.highlights.map(h => `<div class="info">${h}</div>`).join('');
+
+  // Experience
+  const experienceContainer = document.getElementById('experience-list');
+  experienceContainer.innerHTML = data.experience.map(exp => `
+    <div class="timeline-item">
+      <div class="timeline-date">${exp.date}</div>
+      <h3>${exp.title}</h3>
+      <p>${exp.desc}</p>
+    </div>
+  `).join('');
+
+  // Services
+  const servicesContainer = document.getElementById('services-list');
+  servicesContainer.innerHTML = data.services.map(s => `
+    <div class="card">
+      <h3>${s.title}</h3>
+      <p>${s.desc}</p>
+    </div>
+  `).join('');
+
+  // Projects
+  const projectsContainer = document.getElementById('projects-list');
+  projectsContainer.innerHTML = data.projects.map(p => `
+    <div class="card">
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+    </div>
+  `).join('');
+
+  // Skills
+  const skillsContainer = document.getElementById('skills-list');
+  skillsContainer.innerHTML = data.skills.map(s => `
+    <div class="skill">
+      <span>${s.name}</span>
+      <div class="bar"><div class="fill" data-width="${s.level}"></div></div>
+    </div>
+  `).join('');
+
+  // Stats
+  const statsContainer = document.getElementById('stats-list');
+  statsContainer.innerHTML = data.stats.map(s => `
+    <div>
+      <h3>${s.number}</h3>
+      <p>${s.label}</p>
+    </div>
+  `).join('');
+
+  // Re-observe revealed elements since they were just added
+  document.querySelectorAll(".reveal").forEach(el => {
+    revealObserver.observe(el);
+  });
+};
+
 // --- ANIMATED BACKGROUND (CANVAS) ---
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
@@ -198,8 +264,15 @@ scrollToContactBtns.forEach(btn => {
 // --- OVERLAY SYSTEM ---
 const discordOverlay = document.getElementById('discordOverlay');
 const contactOverlay = document.getElementById('contactOverlay');
+const adminLoginOverlay = document.getElementById('adminLoginOverlay');
+const adminDashboard = document.getElementById('adminDashboard');
+
 const openDiscordBtn = document.getElementById('openDiscordOverlay');
 const openContactBtn = document.getElementById('openContactOverlay');
+const openAdminLoginBtn = document.getElementById('openAdminLogin');
+const loginBtn = document.getElementById('loginBtn');
+const generateUpdateBtn = document.getElementById('generateUpdateBtn');
+
 const closeOverlayBtns = document.querySelectorAll('.close-overlay');
 const copyDiscordBtn = document.getElementById('copyDiscordBtn');
 
@@ -212,11 +285,137 @@ const toggleOverlay = (overlay, state) => {
 
 if (openDiscordBtn) openDiscordBtn.onclick = () => toggleOverlay(discordOverlay, true);
 if (openContactBtn) openContactBtn.onclick = () => toggleOverlay(contactOverlay, true);
+if (openAdminLoginBtn) openAdminLoginBtn.onclick = () => toggleOverlay(adminLoginOverlay, true);
+
+// Login Logic
+if (loginBtn) {
+  loginBtn.onclick = () => {
+    const pass = document.getElementById('adminPassword').value;
+    if (pass === 'admin123') { // Simple hardcoded password
+      toggleOverlay(adminLoginOverlay, false);
+      toggleOverlay(adminDashboard, true);
+      initDashboard();
+    } else {
+      alert('ACCESS DENIED. INCORRECT CODE.');
+    }
+  };
+}
+
+// Dashboard Tab Logic
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  };
+});
+
+// Initialize Dashboard Data
+const initDashboard = () => {
+  const data = window.portfolioData;
+  document.getElementById('edit-hero-name').value = data.hero.name;
+  document.getElementById('edit-hero-sub').value = data.hero.sub;
+  document.getElementById('edit-about-text').value = data.about.text;
+  document.getElementById('edit-about-highlights').value = data.about.highlights.join(', ');
+
+  // Stats
+  const statsEdit = document.getElementById('edit-stats-container');
+  statsEdit.innerHTML = data.stats.map((s, i) => `
+    <div class="dashboard-item">
+      <input type="text" value="${s.number}" id="stat-num-${i}">
+      <input type="text" value="${s.label}" id="stat-label-${i}">
+    </div>
+  `).join('');
+
+  // Skills
+  const skillsEdit = document.getElementById('edit-skills-container');
+  skillsEdit.innerHTML = data.skills.map((s, i) => `
+    <div class="dashboard-item">
+      <input type="text" value="${s.name}" id="skill-name-${i}">
+      <input type="range" min="0" max="100" value="${s.level}" id="skill-level-${i}" oninput="updateSkillVal(${i}, this.value)">
+      <span id="skill-val-${i}">${s.level}%</span>
+    </div>
+  `).join('');
+
+  // Projects
+  const projectsEdit = document.getElementById('edit-projects-container');
+  renderEditProjects();
+};
+
+const renderEditProjects = () => {
+  const projectsEdit = document.getElementById('edit-projects-container');
+  projectsEdit.innerHTML = window.portfolioData.projects.map((p, i) => `
+    <div class="dashboard-item">
+      <span class="remove-item" onclick="removeProject(${i})">×</span>
+      <input type="text" value="${p.title}" id="project-title-${i}">
+      <textarea id="project-desc-${i}">${p.desc}</textarea>
+    </div>
+  `).join('');
+};
+
+window.updateSkillVal = (i, val) => {
+  document.getElementById(`skill-val-${i}`).innerText = val + '%';
+};
+
+window.removeProject = (index) => {
+  window.portfolioData.projects.splice(index, 1);
+  renderEditProjects();
+};
+
+document.getElementById('add-project-btn').onclick = () => {
+  window.portfolioData.projects.push({ title: 'New Project', desc: 'Description' });
+  renderEditProjects();
+};
+
+// Generate Update (Clipboard)
+if (generateUpdateBtn) {
+  generateUpdateBtn.onclick = () => {
+    const data = {
+      hero: {
+        name: document.getElementById('edit-hero-name').value,
+        sub: document.getElementById('edit-hero-sub').value
+      },
+      about: {
+        text: document.getElementById('edit-about-text').value,
+        highlights: document.getElementById('edit-about-highlights').value.split(',').map(h => h.trim())
+      },
+      experience: window.portfolioData.experience, // Preserving these for now
+      services: window.portfolioData.services,
+      projects: window.portfolioData.projects.map((_, i) => ({
+        title: document.getElementById(`project-title-${i}`).value,
+        desc: document.getElementById(`project-desc-${i}`).value
+      })),
+      skills: window.portfolioData.skills.map((_, i) => ({
+        name: document.getElementById(`skill-name-${i}`).value,
+        level: parseInt(document.getElementById(`skill-level-${i}`).value)
+      })),
+      stats: window.portfolioData.stats.map((_, i) => ({
+        number: document.getElementById(`stat-num-${i}`).value,
+        label: document.getElementById(`stat-label-${i}`).value
+      }))
+    };
+
+    const scriptContent = `const portfolioData = ${JSON.stringify(data, null, 2)};\n\nwindow.portfolioData = portfolioData;`;
+    navigator.clipboard.writeText(scriptContent);
+    
+    const originalText = generateUpdateBtn.innerText;
+    generateUpdateBtn.innerText = 'COPIED TO CLIPS!';
+    setTimeout(() => {
+      generateUpdateBtn.innerText = originalText;
+      alert('CONTENT SCROLL GENERATED. COMMIT TO GITHUB TO APPLY CHANGES.');
+      window.portfolioData = data;
+      renderContent();
+    }, 1500);
+  };
+}
 
 closeOverlayBtns.forEach(btn => {
   btn.onclick = () => {
     toggleOverlay(discordOverlay, false);
     toggleOverlay(contactOverlay, false);
+    toggleOverlay(adminLoginOverlay, false);
+    toggleOverlay(adminDashboard, false);
   };
 });
 
@@ -224,7 +423,12 @@ closeOverlayBtns.forEach(btn => {
 window.onclick = (e) => {
   if (e.target === discordOverlay) toggleOverlay(discordOverlay, false);
   if (e.target === contactOverlay) toggleOverlay(contactOverlay, false);
+  if (e.target === adminLoginOverlay) toggleOverlay(adminLoginOverlay, false);
+  if (e.target === adminDashboard) toggleOverlay(adminDashboard, false);
 };
+
+// Initial render
+window.onload = renderContent;
 
 // Copy Discord Username logic
 if (copyDiscordBtn) {
