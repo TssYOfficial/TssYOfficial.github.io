@@ -14,7 +14,12 @@ const portfolioData = {
   },
   "experience": [
     {
-      "date": "2023 - Present",
+      "date": "2026 - Present",
+      "title": "Lead Developer",
+      "desc": "Architecting complex Discord bot systems and Minecraft server optimizations for high-traffic environments."
+    },
+    {
+      "date": "2023 - 2024",
       "title": "Lead Developer",
       "desc": "Architecting complex Discord bot systems and Minecraft server optimizations for high-traffic environments."
     },
