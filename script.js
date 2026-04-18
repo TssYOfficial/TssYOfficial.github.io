@@ -344,29 +344,28 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 // Initialize Dashboard Data
 const initDashboard = () => {
   const data = window.portfolioData;
-  document.getElementById('edit-hero-name').value = data.hero.name;
-  document.getElementById('edit-hero-sub').value = data.hero.sub;
-  document.getElementById('edit-about-text').value = data.about.text;
-  document.getElementById('edit-about-highlights').value = data.about.highlights.join(', ');
+  if (!data) return;
 
-  // Stats
-  const statsEdit = document.getElementById('edit-stats-container');
+  document.getElementById('edit-hero-name').value = data.hero.name || '';
+  document.getElementById('edit-hero-sub').value = data.hero.sub || '';
+  document.getElementById('edit-about-text').value = data.about.text || '';
+  document.getElementById('edit-about-highlights').value = (data.about.highlights || []).join(', ');
+
+  // Render lists
   renderEditStats();
-
-  // Skills
-  const skillsEdit = document.getElementById('edit-skills-container');
   renderEditSkills();
-
-  // Projects
   renderEditProjects();
 };
 
 const renderEditStats = () => {
-  const statsEdit = document.getElementById('edit-stats-container');
-  statsEdit.innerHTML = window.portfolioData.stats.map((s, i) => `
+  const container = document.getElementById('edit-stats-container');
+  if (!container) return;
+  container.innerHTML = (window.portfolioData.stats || []).map((s, i) => `
     <div class="dashboard-item">
       <span class="remove-item" onclick="removeStat(${i})">×</span>
+      <label>Number</label>
       <input type="text" value="${s.number}" id="stat-num-${i}">
+      <label>Label</label>
       <input type="text" value="${s.label}" id="stat-label-${i}">
     </div>
   `).join('');
@@ -377,17 +376,24 @@ window.removeStat = (index) => {
   renderEditStats();
 };
 
-document.getElementById('add-stat-btn').onclick = () => {
-  window.portfolioData.stats.push({ number: '0', label: 'New Stat' });
-  renderEditStats();
-};
+const addStatBtn = document.getElementById('add-stat-btn');
+if (addStatBtn) {
+  addStatBtn.onclick = () => {
+    if (!window.portfolioData.stats) window.portfolioData.stats = [];
+    window.portfolioData.stats.push({ number: '0', label: 'New Stat' });
+    renderEditStats();
+  };
+}
 
 const renderEditSkills = () => {
-  const skillsEdit = document.getElementById('edit-skills-container');
-  skillsEdit.innerHTML = window.portfolioData.skills.map((s, i) => `
+  const container = document.getElementById('edit-skills-container');
+  if (!container) return;
+  container.innerHTML = (window.portfolioData.skills || []).map((s, i) => `
     <div class="dashboard-item">
       <span class="remove-item" onclick="removeSkill(${i})">×</span>
+      <label>Skill Name</label>
       <input type="text" value="${s.name}" id="skill-name-${i}">
+      <label>Level (%)</label>
       <input type="range" min="0" max="100" value="${s.level}" id="skill-level-${i}" oninput="updateSkillVal(${i}, this.value)">
       <span id="skill-val-${i}">${s.level}%</span>
     </div>
@@ -399,24 +405,27 @@ window.removeSkill = (index) => {
   renderEditSkills();
 };
 
-document.getElementById('add-skill-btn').onclick = () => {
-  window.portfolioData.skills.push({ name: 'New Skill', level: 50 });
-  renderEditSkills();
-};
+const addSkillBtn = document.getElementById('add-skill-btn');
+if (addSkillBtn) {
+  addSkillBtn.onclick = () => {
+    if (!window.portfolioData.skills) window.portfolioData.skills = [];
+    window.portfolioData.skills.push({ name: 'New Skill', level: 50 });
+    renderEditSkills();
+  };
+}
 
 const renderEditProjects = () => {
-  const projectsEdit = document.getElementById('edit-projects-container');
-  projectsEdit.innerHTML = window.portfolioData.projects.map((p, i) => `
+  const container = document.getElementById('edit-projects-container');
+  if (!container) return;
+  container.innerHTML = (window.portfolioData.projects || []).map((p, i) => `
     <div class="dashboard-item">
       <span class="remove-item" onclick="removeProject(${i})">×</span>
+      <label>Project Title</label>
       <input type="text" value="${p.title}" id="project-title-${i}">
+      <label>Description</label>
       <textarea id="project-desc-${i}">${p.desc}</textarea>
     </div>
   `).join('');
-};
-
-window.updateSkillVal = (i, val) => {
-  document.getElementById(`skill-val-${i}`).innerText = val + '%';
 };
 
 window.removeProject = (index) => {
@@ -424,9 +433,18 @@ window.removeProject = (index) => {
   renderEditProjects();
 };
 
-document.getElementById('add-project-btn').onclick = () => {
-  window.portfolioData.projects.push({ title: 'New Project', desc: 'Description' });
-  renderEditProjects();
+const addProjectBtn = document.getElementById('add-project-btn');
+if (addProjectBtn) {
+  addProjectBtn.onclick = () => {
+    if (!window.portfolioData.projects) window.portfolioData.projects = [];
+    window.portfolioData.projects.push({ title: 'New Project', desc: 'Description' });
+    renderEditProjects();
+  };
+}
+
+window.updateSkillVal = (i, val) => {
+  const label = document.getElementById(`skill-val-${i}`);
+  if (label) label.innerText = val + '%';
 };
 
 // Generate Update (Clipboard)
@@ -441,17 +459,17 @@ if (generateUpdateBtn) {
         text: document.getElementById('edit-about-text').value,
         highlights: document.getElementById('edit-about-highlights').value.split(',').map(h => h.trim())
       },
-      experience: window.portfolioData.experience,
-      services: window.portfolioData.services,
-      projects: window.portfolioData.projects.map((_, i) => ({
+      experience: window.portfolioData.experience || [],
+      services: window.portfolioData.services || [],
+      projects: (window.portfolioData.projects || []).map((_, i) => ({
         title: document.getElementById(`project-title-${i}`).value,
         desc: document.getElementById(`project-desc-${i}`).value
       })),
-      skills: window.portfolioData.skills.map((_, i) => ({
+      skills: (window.portfolioData.skills || []).map((_, i) => ({
         name: document.getElementById(`skill-name-${i}`).value,
         level: parseInt(document.getElementById(`skill-level-${i}`).value)
       })),
-      stats: window.portfolioData.stats.map((_, i) => ({
+      stats: (window.portfolioData.stats || []).map((_, i) => ({
         number: document.getElementById(`stat-num-${i}`).value,
         label: document.getElementById(`stat-label-${i}`).value
       }))
