@@ -49,8 +49,8 @@ const portfolioData = {
   ],
   "projects": [
     {
-      "title": "Discord Guardian",
-      "desc": "Advanced moderation bot with machine learning for spam detection."
+      "title": "Zyro",
+      "desc": "Order custom Discord Bots."
     },
     {
       "title": "SkyBlock Engine",
@@ -71,8 +71,8 @@ const portfolioData = {
       "level": 95
     },
     {
-      "name": "JavaScript / TypeScript",
-      "level": 90
+      "name": "C# (Learning)",
+      "level": 60
     },
     {
       "name": "HTML / CSS",
@@ -85,11 +85,11 @@ const portfolioData = {
   ],
   "stats": [
     {
-      "number": "50+",
+      "number": "20+",
       "label": "Projects"
     },
     {
-      "number": "20+",
+      "number": "15+",
       "label": "Bots"
     },
     {
@@ -97,7 +97,7 @@ const portfolioData = {
       "label": "Servers"
     },
     {
-      "number": "3+",
+      "number": "4+",
       "label": "Years Exp"
     }
   ]
